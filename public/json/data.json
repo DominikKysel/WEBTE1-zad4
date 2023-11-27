@@ -1,9 +1,10 @@
 {
+    "root": "./images",
     "images": [
         {
             "name": "Aupark1",
             "desc": "Aupark",
-            "path": "./images/Aupark1.jpg",
+            "path": "Aupark1.jpg",
             "lng": "en",
             "lat": "en",
             "date": "2017-01-01"
@@ -11,7 +12,7 @@
         {
             "name": "Aupark2",
             "desc": "Aupark",
-            "path": "./images/Aupark2.jpg",
+            "path": "Aupark2.jpg",
             "lng": "en",
             "lat": "en",
             "date": "2017-01-01"
@@ -19,7 +20,7 @@
         {
             "name": "Aupark3",
             "desc": "Aupark",
-            "path": "./images/Aupark3.jpg",
+            "path": "Aupark3.jpg",
             "lng": "en",
             "lat": "en",
             "date": "2017-01-01"
@@ -27,7 +28,7 @@
         {
             "name": "Avion",
             "desc": "Avion",
-            "path": "./images/Avion.jpg",
+            "path": "Avion.jpg",
             "lng": "en",
             "lat": "en",
             "date": "2017-01-01"
@@ -35,7 +36,7 @@
         {
             "name": "Bory Mall",
             "desc": "Bory Mall",
-            "path": "./images/BoryMall.jpg",
+            "path": "BoryMall.jpg",
             "lng": "en",
             "lat": "en",
             "date": "2017-01-01"
@@ -43,7 +44,7 @@
         {
             "name": "Eurovea1",
             "desc": "Eurovea",
-            "path": "./images/Eurovea1.jpg",
+            "path": "Eurovea1.jpg",
             "lng": "en",
             "lat": "en",
             "date": "2017-01-01"
@@ -51,7 +52,7 @@
         {
             "name": "Eurovea2",
             "desc": "Eurovea",
-            "path": "./images/Eurovea2.jpg",
+            "path": "Eurovea2.jpg",
             "lng": "en",
             "lat": "en",
             "date": "2017-01-01"
@@ -59,7 +60,7 @@
         {
             "name": "Nivy",
             "desc": "Nivy",
-            "path": "./images/Nivy.jpg",
+            "path": "Nivy.jpg",
             "lng": "en",
             "lat": "en",
             "date": "2017-01-01"
@@ -67,7 +68,7 @@
         {
             "name": "Shopping Palace",
             "desc": "Shopping Palace Zlaté Piesky",
-            "path": "./images/ShoppingPalace.jpg",
+            "path": "ShoppingPalace.jpg",
             "lng": "en",
             "lat": "en",
             "date": "2017-01-01"
@@ -75,7 +76,7 @@
         {
             "name": "VIVO",
             "desc": "VIVO! Bratislava",
-            "path": "./images/VIVO.jpg",
+            "path": "VIVO.jpg",
             "lng": "en",
             "lat": "en",
             "date": "2017-01-01"
