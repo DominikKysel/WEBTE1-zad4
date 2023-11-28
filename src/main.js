@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import 'bootstrap/dist/css/bootstrap.css'
 import bootstrap from 'bootstrap/dist/js/bootstrap'
 import './assets/main.css'
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 import App from './App.vue'
 import router from './router'

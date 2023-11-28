@@ -5,81 +5,81 @@
             "name": "Aupark1",
             "desc": "Aupark",
             "path": "Aupark1.jpg",
-            "lng": "en",
-            "lat": "en",
-            "date": "2017-01-01"
+            "lat": "48.13257650956864",
+            "lng": "17.107717488540537",
+            "date": "2023-11-01"
         },
         {
             "name": "Aupark2",
             "desc": "Aupark",
             "path": "Aupark2.jpg",
-            "lng": "en",
-            "lat": "en",
-            "date": "2017-01-01"
+            "lat": "48.13257650956864",
+            "lng": "17.107717488540537",
+            "date": "2023-11-01"
         },
         {
             "name": "Aupark3",
             "desc": "Aupark",
             "path": "Aupark3.jpg",
-            "lng": "en",
-            "lat": "en",
-            "date": "2017-01-01"
+            "lat": "48.13257650956864",
+            "lng": "17.107717488540537",
+            "date": "2023-11-01"
         },
         {
             "name": "Avion",
             "desc": "Avion",
             "path": "Avion.jpg",
-            "lng": "en",
-            "lat": "en",
-            "date": "2017-01-01"
+            "lat": "48.16747542005507",
+            "lng": "17.180048294486085",
+            "date": "2023-11-09"
         },
         {
             "name": "Bory Mall",
             "desc": "Bory Mall",
             "path": "BoryMall.jpg",
-            "lng": "en",
-            "lat": "en",
-            "date": "2017-01-01"
+            "lat": "48.20574604263331",
+            "lng": "17.033921877717745",
+            "date": "2023-11-15"
         },
         {
             "name": "Eurovea1",
             "desc": "Eurovea",
             "path": "Eurovea1.jpg",
-            "lng": "en",
-            "lat": "en",
-            "date": "2017-01-01"
+            "lat": "48.140479330277394",
+            "lng": "17.12132165345335",
+            "date": "2023-11-05"
         },
         {
             "name": "Eurovea2",
             "desc": "Eurovea",
             "path": "Eurovea2.jpg",
-            "lng": "en",
-            "lat": "en",
-            "date": "2017-01-01"
+            "lat": "48.140479330277394",
+            "lng": "17.12132165345335",
+            "date": "2023-11-05"
         },
         {
             "name": "Nivy",
             "desc": "Nivy",
             "path": "Nivy.jpg",
-            "lng": "en",
-            "lat": "en",
-            "date": "2017-01-01"
+            "lat": "48.14687049216445",
+            "lng": "17.12730157999444",
+            "date": "2023-11-05"
         },
         {
             "name": "Shopping Palace",
-            "desc": "Shopping Palace Zlaté Piesky",
+            "desc": "Shopping Palace Zlngé Piesky",
             "path": "ShoppingPalace.jpg",
-            "lng": "en",
-            "lat": "en",
-            "date": "2017-01-01"
+            "lat": "48.185420548563506",
+            "lng": "17.17777324453472",
+            "date": "2023-11-10"
         },
         {
             "name": "VIVO",
             "desc": "VIVO! Bratislava",
             "path": "VIVO.jpg",
-            "lng": "en",
-            "lat": "en",
-            "date": "2017-01-01"
+            "lat": "48.16867755600904",
+            "lng": "17.138720818433566",
+            "date": "2023-11-11"
         }
     ]
 }

@@ -1,8 +1,18 @@
+<script setup>
+import Map from '../components/MapboxMap.vue';
+
+</script>
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <main class="container">
+    <Map />
+  </main>
 </template>
 
-<style>
+<style scoped>
+main {
+  flex: 1;
+  display: flex;
+  position: relative;
+}
+
 </style>

@@ -49,11 +49,11 @@ const pauseCarousel = () => {
 
 </script>
 <template>
-<div class="modal fade" id="carouselModal" tabindex="-1" aria-labelledby="carouselModalLabel" aria-hidden="true">
+<div class="modal fade" id="carouselModal" tabindex="-1" aria-labelledby="carouselModalLabel" aria-hidden="true" data-bs-theme="dark">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="carouselModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="carouselModalLabel">Galéria</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -64,7 +64,7 @@ const pauseCarousel = () => {
                 <div class="carousel-inner">
                     <div class="carousel-item" :class="[(index === ind) ? 'active' : '']" v-for="(item, index) in images" :key="index">
                         <img :src="root+'/'+item.path" class="img-fluid d-block w-100" :alt="item.name">
-                        <div class="carousel-caption d-none d-md-block mx-auto w-100">
+                        <div class="carousel-caption d-block mx-auto w-100">
                             <h5>{{ item.name }}</h5>
                             <p>{{ item.desc }}</p>
                         </div>
@@ -98,7 +98,7 @@ const pauseCarousel = () => {
     background-size: cover;
 }
 .carousel-caption {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     left: 0;
     right: 0;
     bottom: 0;
