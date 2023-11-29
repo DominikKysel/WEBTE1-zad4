@@ -18,15 +18,15 @@ onMounted(() => {
     zoom: 12
   });
   map.value.addControl(new mapboxgl.NavigationControl());
-  
+
   fetch('./json/data.json')
     .then((res) => res.json())
     .then((data) => {
-        root.value = data.root;
-        images.push(...data.images)
-        orgImages.push(...data.images)
-        genMarkers();
-        loaded.value = true
+      root.value = data.root;
+      images.push(...data.images)
+      orgImages.push(...data.images)
+      genMarkers();
+      loaded.value = true
     })
     .catch((err) => console.log(err))
 })
@@ -38,36 +38,36 @@ onUnmounted(() => {
 
 const genMarkers = () => {
   class ClickableMarker extends mapboxgl.Marker {
-      // zdroj: https://gist.github.com/chriswhong/8977c0d4e869e9eaf06b4e9fda80f3ab
-      // new method onClick, sets _handleClick to a function you pass in
-      onClick(handleClick) {
-        this._handleClick = handleClick;
-        return this;
-      }
+    // zdroj: https://gist.github.com/chriswhong/8977c0d4e869e9eaf06b4e9fda80f3ab
+    // new method onClick, sets _handleClick to a function you pass in
+    onClick(handleClick) {
+      this._handleClick = handleClick;
+      return this;
+    }
 
-      // the existing _onMapClick was there to trigger a popup
-      // but we are hijacking it to run a function we define
-      _onMapClick(e) {
-        const targetElement = e.originalEvent.target;
-        const element = this._element;
+    // the existing _onMapClick was there to trigger a popup
+    // but we are hijacking it to run a function we define
+    _onMapClick(e) {
+      const targetElement = e.originalEvent.target;
+      const element = this._element;
 
-        if (this._handleClick && (targetElement === element || element.contains((targetElement)))) {
-          this._handleClick();
-        }
+      if (this._handleClick && (targetElement === element || element.contains((targetElement)))) {
+        this._handleClick();
       }
-    };
+    }
+  };
 
   images.forEach((item) => {
     let done = false;
-    if(setMarkers.length) {
+    if (setMarkers.length) {
       setMarkers.forEach((marker) => {
         const lngLat = marker.getLngLat();
-        if(lngLat.lng === parseFloat(item.lng) && lngLat.lat === parseFloat(item.lat)) {
+        if (lngLat.lng === parseFloat(item.lng) && lngLat.lat === parseFloat(item.lat)) {
           done = true;
         }
       })
     }
-    if(done) return;
+    if (done) return;
     const marker = new ClickableMarker()
     setMarkers.push(marker);
     marker.setLngLat([item.lng, item.lat])
@@ -92,7 +92,7 @@ const filterImages = (lngLat) => {
 <template>
   <div ref="mapContainer" id="mapContainer" class="map-container"></div>
   <div v-if="loaded">
-      <GalleryCarousel :images="images" :root="root" :loaded="true" :ind="0"/>
+    <GalleryCarousel :images="images" :root="root" :loaded="true" :ind="0" />
   </div>
 </template>
 
@@ -100,5 +100,9 @@ const filterImages = (lngLat) => {
 .map-container {
   flex: 1;
   height: 80vh;
+}
+
+.mapboxgl-marker {
+  cursor: pointer;
 }
 </style>
