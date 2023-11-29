@@ -13,9 +13,9 @@ const loaded = ref(false)
 onMounted(() => {
   map.value = new mapboxgl.Map({
     container: 'mapContainer',
-    style: 'mapbox://styles/mapbox/streets-v11',
+    style: 'mapbox://styles/mapbox/navigation-night-v1',
     center: [17.12608737491174, 48.15239997299376],
-    zoom: 12
+    zoom: 11
   });
   map.value.addControl(new mapboxgl.NavigationControl());
 
@@ -25,6 +25,8 @@ onMounted(() => {
       root.value = data.root;
       images.push(...data.images)
       orgImages.push(...data.images)
+      images.sort((a, b) => new Date(a.date) - new Date(b.date));
+      orgImages.sort((a, b) => new Date(a.date) - new Date(b.date));
       genMarkers();
       loaded.value = true
     })
@@ -85,12 +87,69 @@ const filterImages = (lngLat) => {
   const filteredImages = orgImages.filter((item) => item.lng === lngLat.lng.toString() && item.lat === lngLat.lat.toString())
   images.splice(0, images.length, ...filteredImages)
 }
+const getRoute = async () => {
+  const coordinates = images.map((item) => [item.lng, item.lat])
+  const textRoutes = coordinates.map((item) => item.join(',')).join(';')
+  const query = await fetch(
+    `https://api.mapbox.com/directions/v5/mapbox/driving/${textRoutes}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+    { method: 'GET' }
+  );
+  const json = await query.json();
+  const data = json.routes[0];
+  const route = data.geometry.coordinates;
+  const geojson = {
+    type: 'Feature',
+    properties: {},
+    geometry: {
+      type: 'LineString',
+      coordinates: route
+    }
+  };
+  // if the route already exists on the map, we'll reset it using setData
+  if (map.value.getSource('route')) {
+    map.value.getSource('route').setData(geojson);
+  }
+  // otherwise, we'll make a new request
+  else {
+    map.value.addLayer({
+      id: 'route',
+      type: 'line',
+      source: {
+        type: 'geojson',
+        data: geojson
+      },
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      paint: {
+        'line-color': '#00ff15',
+        'line-width': 5,
+        'line-opacity': 0.75
+      }
+    });
+  }
+}
 
+const drawRoute = () => {
+  getRoute();
+}
+
+const removeRoute = () => {
+  if (map.value.getLayer('route')) {
+    map.value.removeLayer('route');
+    map.value.removeSource('route');
+  }
+}
 
 </script>
 
 <template>
   <div ref="mapContainer" id="mapContainer" class="map-container"></div>
+  <div id="routeButtons">
+    <button type="button" class="btn btn-danger" @click="removeRoute()">Zrušiť trasu</button>
+    <button type="button" class="btn btn-primary" @click="drawRoute()">Trasa</button>
+  </div>
   <div v-if="loaded">
     <GalleryCarousel :images="images" :root="root" :loaded="true" :ind="0" />
   </div>
@@ -102,7 +161,10 @@ const filterImages = (lngLat) => {
   height: 80vh;
 }
 
-.mapboxgl-marker {
-  cursor: pointer;
+#routeButtons {
+  position: absolute;
+  bottom: -20vh;
+  width: 80vw;
+  padding: 20px;
 }
 </style>

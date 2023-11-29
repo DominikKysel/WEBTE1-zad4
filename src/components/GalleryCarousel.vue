@@ -1,7 +1,7 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import bootstrap from 'bootstrap/dist/js/bootstrap';
-
+import mapboxgl from "mapbox-gl";
 
 const props = defineProps({
     images: {
@@ -25,14 +25,50 @@ const props = defineProps({
 })
 const isPaused = ref(false);
 const pauseToggle = ref("Zastav");
+const currImg = ref([props.images[props.ind].lng, props.images[props.ind].lat]);
+mapboxgl.accessToken = 'pk.eyJ1IjoiZG9taW5pa2t5c2VsIiwiYSI6ImNscGlncjhzdjBobHAya252OWRmbXlrdnMifQ.kvtPEds2zEHT6wu1vVltPg';
+let map = ref(null);
+const galleryMap = ref(null)
 onMounted(() => {
+    map.value = new mapboxgl.Map({
+            container: 'galleryMap',
+            style: 'mapbox://styles/mapbox/navigation-night-v1',
+            center: [currImg.value[0], currImg.value[1]],
+            zoom: 5
+    });
+    map.value.addControl(new mapboxgl.NavigationControl());
+    
     const carousel = new bootstrap.Carousel(document.querySelector('#photoCarousel'), {
-        interval: 2000,
+        interval: 5000,
         pause: false
     })
     carousel.to(props.ind);
+    let gallery = document.querySelector('#photoCarousel')
+    const marker = new mapboxgl.Marker()
+    marker.setLngLat([parseFloat(currImg.value[0]), parseFloat(currImg.value[1])])
+    marker.addTo(map.value);
+    map.value.flyTo({
+        center: [currImg.value[0], currImg.value[1]],
+        zoom: 15
+    })
+    gallery.addEventListener('slid.bs.carousel', () => {
+        let activeImg = gallery.querySelector('.carousel-item.active')
+        let activeIdx = activeImg.dataset.index;
+        currImg.value = [props.images[activeIdx].lng, props.images[activeIdx].lat]
+        console.log(currImg.value)
+        marker.remove()
+        marker.setLngLat([parseFloat(currImg.value[0]), parseFloat(currImg.value[1])])
+        marker.addTo(map.value);
+        map.value.flyTo({
+            center: [currImg.value[0], currImg.value[1]],
+            zoom: 15
+        })
+    })
 })
-
+onUnmounted(() => {
+  map.value.remove();
+  map.value = null;
+})
 const pauseCarousel = () => {
     const carousel = bootstrap.Carousel.getInstance(document.querySelector('#photoCarousel'))
     if (isPaused.value) {
@@ -62,11 +98,13 @@ const pauseCarousel = () => {
                     <button v-for="(item, index) in images" :key="index" type="button" data-bs-target="#photoCarousel" :data-bs-slide-to="index" class="active" aria-current="true" :aria-label="item.name"></button>
                 </div>
                 <div class="carousel-inner">
-                    <div class="carousel-item" :class="[(index === ind) ? 'active' : '']" v-for="(item, index) in images" :key="index">
+                    <div class="carousel-item" :class="[(index === ind) ? 'active' : '']" v-for="(item, index) in images" :key="index" :data-index="index">
                         <img :src="root+'/'+item.path" class="img-fluid d-block w-100" :alt="item.name">
                         <div class="carousel-caption d-block mx-auto w-100">
                             <h5>{{ item.name }}</h5>
-                            <p>{{ item.desc }}</p>
+                            <p>{{ item.desc }} <br>
+                                {{ item.date }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -79,6 +117,7 @@ const pauseCarousel = () => {
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+            <div ref="galleryMap" id="galleryMap" class="map-container"></div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -102,5 +141,18 @@ const pauseCarousel = () => {
     left: 0;
     right: 0;
     bottom: 0;
+}
+#galleryMap {
+  position: relative;
+  width: 30%;
+  height: 30%;
+  margin: 5% auto;
+}
+
+@media screen and (max-width: 1024px) {
+    #galleryMap {
+        width: 80%;
+        height: 80%;
+    }
 }
 </style>

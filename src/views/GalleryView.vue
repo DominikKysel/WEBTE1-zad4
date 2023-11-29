@@ -22,19 +22,17 @@ onMounted(() => {
 
 const filterImages = () => {
   const searchInput = document.querySelector('#searchInput')
-  if(searchInput.value === '') {
-    images.splice(0, orgImages.length, ...orgImages)
-  } else {
+  images.splice(0, orgImages.length, ...orgImages)
+  if(searchInput.value !== '') {
     const filteredImages = images.filter((item) => item.name.toLowerCase().includes(searchInput.value.toLowerCase()) || item.desc.toLowerCase().includes(searchInput.value.toLowerCase()))
     images.splice(0, images.length, ...filteredImages)
   }
-  
 }
 
 </script>
 <template>
   <main class="container">
-    <h1 class="pt-5">Gallery</h1>
+    <h1 class="pt-5">Galéria</h1>
     <div class="row justify-content-center">
       <div class="col-12 pt-3">
         <input type="text" name="searchInput" id="searchInput" class="form-control" placeholder="Vyhľadajte výraz v galérii" @input="filterImages()">

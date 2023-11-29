@@ -4,15 +4,18 @@ import Map from '../components/MapboxMap.vue';
 </script>
 <template>
   <main class="container">
-    <Map />
+    <div class="wrapper">
+      <Map />
+    </div>
   </main>
 </template>
 
 <style scoped>
-main {
+.wrapper {
   flex: 1;
   display: flex;
   position: relative;
+  padding-top: 5vh;
 }
 
 </style>
